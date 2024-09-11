@@ -11,6 +11,34 @@ install_dotfiles () {
   done
 }
 
+install_configs () {
+  for dir in "$HOME/.dotfiles/config"/*; do
+    echo "Installing $(basename "$dir")"
+
+    install_config "$(basename "$dir")"
+  done
+}
+
+install_config () {
+  local source_full_path="$HOME/.dotfiles/config/$1"
+  local target_full_path="$HOME/.config/$1"
+
+  if [ -e "$target_full_path/.dotfile" ]; then
+    echo "Removing existing $target_full_path folder"
+
+    rm -rf "$target_full_path"
+  elif [ -d "$target_full_path" ]; then
+    echo "Backing up existing $target_full_path folder"
+
+    mv "$target_full_path" "$target_full_path"_backup_"$(date +%s%3N)"
+  fi
+
+  mkdir -p "$target_full_path"
+  touch "$target_full_path"/.dotfile
+
+  ln -s "${source_full_path}"/* "${target_full_path}/"
+}
+
 ln_file_to_home_directory () {
   source_full_path="$HOME/.dotfiles/$1"
   target_full_path=${2:-"$HOME/.$1"}
@@ -36,6 +64,7 @@ main() {
   fi
 
   install_dotfiles
+  install_configs
 
   echo "Finished installation"
 }
