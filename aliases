@@ -1,0 +1,38 @@
+alias gclone='git clone'
+alias gs='git status'
+alias gst='git stash'
+alias gstp='git stash pop'
+alias gsta='git stash apply'
+alias ga='git add'
+alias gr='git rebase'
+alias gra='git rebase --abort'
+alias grc='git rebase --continue'
+alias gri='git rebase --interactive --autosquash'
+alias grom='git rebase origin/master'
+alias glo='git log --oneline'
+alias gd='git diff'
+alias gf='git fetch'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gp='git push'
+alias gpull='git pull'
+alias gre='git reset'
+alias grpo='git remote prune origin'
+alias glog='git log --graph --oneline'
+alias glos='git log --stat'
+
+alias vim=nvim
+
+alias be='bundle exec'
+
+alias ssstart='sudo systemctl start'
+alias ssstop='sudo systemctl stop'
+
+alias doc=docker
+alias docom=docker-compose
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+
+alias editdot='cd ~/dotfiles && vim .'
+
