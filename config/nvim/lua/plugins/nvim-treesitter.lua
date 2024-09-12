@@ -75,6 +75,7 @@ return {
           "vimdoc",
           "luadoc",
           "vim",
+          "gotmpl",
         },
         auto_install = true,
         endwise = {

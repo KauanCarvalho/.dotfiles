@@ -106,4 +106,3 @@ autoload -Uz compinit promptinit; promptinit
 
 # Uses pure as prompt.
 prompt pure
-

@@ -12,8 +12,12 @@ return {
       "javascript",
       "javascriptreact",
       "lua",
-      "vue"
+      "vue",
+      "eruby",
+      "elixir",
     },
+    event = "BufEnter",
+    opts = { "*" },
     lazy = true
   },
 }
