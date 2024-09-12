@@ -25,3 +25,10 @@ map("n", "<M-p>", "<C-w>p")
 -- Easy save or close files.
 map("n", "<leader>w", ":w<cr>")
 map("n", "<leader>q", ":q<cr>")
+
+-- Easy path files.
+vim.cmd("com! RelativePath let @+=expand('%:f')")
+
+-- Easy format json.
+vim.cmd("com! FormatJSON :%!jq '.'")
+vim.cmd("com! MinifyJSON :%!jq -c")
