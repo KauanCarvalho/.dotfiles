@@ -20,6 +20,9 @@ set.splitbelow     = true
 set.splitright     = true
 set.diffopt:append("vertical")
 
+-- Clipboard.
+set.clipboard      = "unnamedplus"
+
 -- Syntax highlighting.
 vim.cmd("syntax off")
 
