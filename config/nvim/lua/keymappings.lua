@@ -32,3 +32,6 @@ vim.cmd("com! RelativePath let @+=expand('%:f')")
 -- Easy format json.
 vim.cmd("com! FormatJSON :%!jq '.'")
 vim.cmd("com! MinifyJSON :%!jq -c")
+
+-- Easy ctags.
+vim.cmd("com! Ctags :!ctags -R -u .")
