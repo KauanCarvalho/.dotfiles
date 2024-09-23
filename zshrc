@@ -63,6 +63,12 @@ fi
 
 . $HOME/.asdf/asdf.sh
 
+# TPM.
+if [[ ! -d ~/.tmux/plugins/tpm ]];
+then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
 # Load specific environment settings, such as work, study, ...
 [[ -f ~/.zsh_env ]] && source ~/.zsh_env
 
@@ -99,6 +105,8 @@ then
   git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
 fi
 fpath+=($HOME/.zsh/pure)
+
+[[ -z "$TMUX" ]] && tmux new-session -A -s main
 
 # Enable the famous zsh tab-completion system and the prompt may seem quite boring however,
 # but we can fix it easily in several steps. First, we need to initialize advanced prompt support.
