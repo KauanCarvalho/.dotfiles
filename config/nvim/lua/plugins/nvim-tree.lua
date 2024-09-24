@@ -2,6 +2,7 @@ return {
   "nvim-tree/nvim-tree.lua",
   event = "VeryLazy",
   cmd = { "NvimTreeToggle" },
+  dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
   config = function()
     local function on_attach(bufnr)
       local api = require("nvim-tree.api")
@@ -82,9 +83,9 @@ return {
         group_empty = true,
         icons = {
           show = {
-            file = false,
-            folder = false,
-            folder_arrow = false,
+            file = true,
+            folder = true,
+            folder_arrow = true,
             git = false,
           }
         }
