@@ -4,3 +4,5 @@ pry
 rubocop
 solargraph
 standard
+tmuxinator
+docker-sync
