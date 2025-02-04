@@ -13,12 +13,9 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
-config.color_scheme = 'Catppuccin Macchiato'
-
+config.color_scheme = 'rose-pine'
 config.hide_tab_bar_if_only_one_tab = true
-
 config.window_background_opacity = 1
-
 config.window_padding = {
   left = 0,
   right = 0,

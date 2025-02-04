@@ -56,12 +56,8 @@ bindkey '^P' up-history
 bindkey '^N' down-history
 
 # ASDF.
-if [[ ! -d ~/.asdf ]]
-then
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.1
-fi
-
-. $HOME/.asdf/asdf.sh
+export PATH="$HOME/bin:$PATH"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # TPM.
 if [[ ! -d ~/.tmux/plugins/tpm ]];
@@ -105,6 +101,7 @@ then
   git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
 fi
 fpath+=($HOME/.zsh/pure)
+fpath+=(${ASDF_DATA_DIR}/completions)
 
 [[ -z "$TMUX" ]] && tmux new-session -A -s main
 
