@@ -1,10 +1,10 @@
 return {
-  "numToStr/Comment.nvim",
+  'numToStr/Comment.nvim',
   opts = {
     toggler = {
-      line = "gcc",
-      block = "gbc",
+      line = 'gcc',
+      block = 'gbc',
     },
   },
-  event = "VeryLazy"
+  event = 'VeryLazy'
 }

@@ -5,26 +5,30 @@ set.termguicolors  = true
 set.number         = true
 set.numberwidth    = 4
 set.relativenumber = false
-set.backspace      = "indent,eol,start"
+set.backspace      = 'indent,eol,start'
 set.history        = 1000
 set.showcmd        = true
 set.showmode       = true
-set.gcr            = "a:blinkon0"
+
+-- Cursor & Display settings.
+set.gcr            = 'a:blinkon0'
 set.visualbell     = true
 set.autoread       = true
-set.mouse:append("a")
-set.colorcolumn    = "81"
+
+-- Window settings.
+set.mouse:append('a')
+set.colorcolumn    = '81'
 set.hidden         = true
 set.lazyredraw     = true
 set.splitbelow     = true
 set.splitright     = true
-set.diffopt:append("vertical")
+set.diffopt:append('vertical')
 
 -- Clipboard.
-set.clipboard      = "unnamedplus"
+set.clipboard      = 'unnamedplus'
 
 -- Syntax highlighting.
-vim.cmd("syntax off")
+vim.cmd('syntax off')
 
 -- Swap and backup files.
 set.swapfile       = false
@@ -32,7 +36,7 @@ set.backup         = false
 set.writebackup    = false
 
 -- Undo.
-set.undodir        = vim.fn.expand("~/.config/nvim/backups")
+set.undodir        = vim.fn.expand('~/.config/nvim/backups')
 set.undofile       = true
 
 -- Indentation.
@@ -41,44 +45,44 @@ set.smarttab       = true
 set.expandtab      = true
 set.shiftwidth     = 2
 
-vim.cmd("filetype plugin indent on")
+vim.cmd('filetype plugin indent on')
 
 -- Display tabs and trailing spaces visually.
 set.wrap           = false
 set.linebreak      = true
 set.list           = true
 set.listchars:append({
-  tab = ">~",
-  trail = "."
+  tab = '>~',
+  trail = '.'
 })
 
 -- Folds.
-set.foldmethod     = "indent"
-set.foldnestmax    = 3
-set.foldcolumn     = "0"
+set.foldmethod     = 'indent'
+set.foldnestmax    = 2
+set.foldcolumn     = '0'
 set.foldlevel      = 99
 set.foldlevelstart = 99
 set.foldenable     = true
 
 -- Completion.
-set.wildmode       = "list:longest"
+set.wildmode       = 'list:longest'
 set.wildmenu       = true
 set.wildignore = {
-  "*.o",
-  "*.obj",
-  "*~",
-  "*.config/nvim/backups*",
-  "*sass-cache*",
-  "*DS_Store*",
-  "node_modules/**",
-  "vendor/rails/**",
-  "vendor/cache/**",
-  "*.gem",
-  "log/**",
-  "tmp/**",
-  "*.png",
-  "*.jpg",
-  "*.gif"
+  '*.o',
+  '*.obj',
+  '*~',
+  '*.config/nvim/backups*',
+  '*sass-cache*',
+  '*DS_Store*',
+  'node_modules/**',
+  'vendor/rails/**',
+  'vendor/cache/**',
+  '*.gem',
+  'log/**',
+  'tmp/**',
+  '*.png',
+  '*.jpg',
+  '*.gif'
 }
 
 -- Scrolling.
@@ -95,37 +99,37 @@ set.incsearch      = true
 set.hlsearch       = true
 set.ignorecase     = true
 set.smartcase      = true
-set.inccommand     = "split"
+set.inccommand     = 'split'
 
 -- Disables netrw.
-vim.g.loaded_netrw = 1
+vim.g.loaded_netrw       = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- Leader key.
-vim.g.mapleader    = " "
+vim.g.mapleader    = ' '
 
 -- Plugin Manager for Neovim.
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable',
     lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins", {
-  lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
+require('lazy').setup('plugins', {
+  lockfile = vim.fn.stdpath('config') .. '/lazy-lock.json',
   change_detection = {
     notify = false
   }
 })
 
-require("keymappings")
+require('keymappings')
 
 -- Nvim tree autoload.
 local function open_nvim_tree()
@@ -136,8 +140,8 @@ local function open_nvim_tree()
   end
 
   vim.schedule(function()
-    vim.cmd("NvimTreeFindFileToggle")
+    vim.cmd('NvimTreeFindFileToggle')
   end)
 end
 
-vim.api.nvim_create_autocmd("User", { pattern = "NvimTreeLoaded", callback = open_nvim_tree })
+vim.api.nvim_create_autocmd('User', { pattern = 'NvimTreeLoaded', callback = open_nvim_tree })
