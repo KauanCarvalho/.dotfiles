@@ -119,6 +119,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins", {
+  lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",
   change_detection = {
     notify = false
   }
@@ -127,7 +128,7 @@ require("lazy").setup("plugins", {
 require("keymappings")
 
 -- Nvim tree autoload.
-local function open_nvim_tree(event)
+local function open_nvim_tree()
   local directory = vim.fn.isdirectory(vim.api.nvim_buf_get_name(0)) == 1
 
   if not directory then
