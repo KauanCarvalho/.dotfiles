@@ -3,6 +3,7 @@ stty -ixon
 
 # Set nvim as default editor.
 export EDITOR=nvim
+export XMODIFIERS=@im=ibus
 
 # Assume that the terminal displays combining characters correctly.
 # Specifically, if a base alphanumeric character is followed by one or more zero-width punctuation characters,
@@ -103,6 +104,7 @@ fi
 fpath+=($HOME/.zsh/pure)
 fpath+=(${ASDF_DATA_DIR}/completions)
 
+# TMUX session.
 [[ -z "$TMUX" ]] && tmux new-session -A -s main
 
 # Enable the famous zsh tab-completion system and the prompt may seem quite boring however,

@@ -3,7 +3,7 @@
 set -eu pipefail
 
 install_dotfiles () {
-  dotfiles=( aliases asdfrc default-gems gemrc gitattributes gitignore tmux.conf wezterm.lua zshrc )
+  dotfiles=( aliases asdfrc default-gems gemrc gitattributes gitignore tmux.conf solargraph.yml wezterm.lua zshrc )
 
   for dotfile in "${dotfiles[@]}";
   do
