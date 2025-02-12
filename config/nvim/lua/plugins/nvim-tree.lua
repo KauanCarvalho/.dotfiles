@@ -65,7 +65,7 @@ return {
       vim.keymap.set('n', '<2-LeftMouse>', api.node.open.edit, opts('Open'))
       vim.keymap.set('n', '<2-RightMouse>', api.tree.change_root_to_node, opts('CD'))
 
-      vim.keymap.set('n', 'u', api.tree.change_root_to_parent, opts("Up"))
+      vim.keymap.set('n', 'u', api.tree.change_root_to_parent, opts('Up'))
     end
 
     require('nvim-tree').setup({
