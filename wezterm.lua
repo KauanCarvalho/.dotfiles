@@ -17,7 +17,8 @@ config.color_scheme = 'rose-pine'
 
 config.hide_tab_bar_if_only_one_tab = true
 
-config.window_background_opacity = 1
+config.window_background_opacity = 0.85
+config.text_background_opacity = 1.0
 
 config.window_padding = {
   left = 0,
