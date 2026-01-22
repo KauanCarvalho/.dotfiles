@@ -1,3 +1,4 @@
+# Git
 alias gclone='git clone'
 alias gs='git status'
 alias gst='git stash'
@@ -21,17 +22,36 @@ alias grpo='git remote prune origin'
 alias glog='git log --graph --oneline'
 alias glos='git log --stat'
 
-alias vim=nvim
+# Neovim
+alias vim='nvim'
 
+# Bundler (Ruby)
 alias be='bundle exec'
 
+# Systemctl
 alias ssstart='sudo systemctl start'
 alias ssstop='sudo systemctl stop'
 
-alias doc=docker
-alias docom=docker-compose
+# Docker
+alias doc='docker'
+alias docom='docker compose'
 
+# Ls
 alias ls='ls --color=auto'
+
+# Grep
 alias grep='grep --color=auto'
 
-alias editdot='cd ~/.dotfiles && vim .'
+# Dotfiles
+alias editdot='cd ~/.dotfiles && nvim .'
+
+# Make
+alias mk='make'
+
+# Go
+alias gofmtall='gofmt -w .'
+alias got='go test ./...'
+alias gob='go build ./...'
+alias gor='go run .'
+alias gomt='go mod tidy'
+
