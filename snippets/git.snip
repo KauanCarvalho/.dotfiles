@@ -1,0 +1,59 @@
+## Remove all local branches except main and master (FORCE)
+git branch | grep -vE '^\*|main|master' | xargs -r git branch -D
+
+## Remove merged branches except main and master
+git branch --merged | grep -vE '^\*|main|master' | xargs -r git branch -d
+
+## Reset current branch to origin (HARD)
+git fetch origin && git reset --hard origin/$(git branch --show-current)
+
+## Undo last commit keeping changes staged
+git reset --soft HEAD~1
+
+## Squash last N commits into one
+git reset --soft HEAD~<N> && git commit
+
+## Interactive rebase last N commits
+git rebase -i HEAD~<N>
+
+## Show branches sorted by last commit date
+git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:relative) %(refname:short)'
+
+## Find commits by author
+git log --author="<name>" --oneline --decorate
+
+## Find commits touching a file
+git log --follow -- <file>
+
+## Show files changed between branches
+git diff --name-only main..HEAD
+
+## Count commits ahead/behind main
+git rev-list --left-right --count main...HEAD
+
+## Rebase current branch onto main
+git fetch origin && git rebase origin/main
+
+## Force push current branch (with lease)
+git push --force-with-lease
+
+## Show detailed diff compared to main
+git diff main..HEAD
+
+## Show commits not yet pushed
+git log @{u}.. --oneline --decorate
+
+## Show commit history graph (compact)
+git log --graph --oneline --decorate --all
+
+## Show last commit per author
+git shortlog -s -n
+
+## Search commits by message
+git log --grep="<text>" --oneline
+
+## Search commits touching a file
+git log --follow --oneline -- <file>
+
+## Show files changed in last commit
+git show --name-only --oneline
