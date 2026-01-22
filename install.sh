@@ -61,10 +61,13 @@ ln_file_to_home_directory () {
 install_tmux () {
   local source="$HOME/.dotfiles/tmux/tmux.conf"
   local target="$HOME/.tmux.conf"
+  local backup="${target}_backup_$(date +%Y%m%d_%H%M%S)"
 
   if [ -e "$target" ] || [ -L "$target" ]; then
     echo "Backing up ~/.tmux.conf"
-    cp -L "$target" "${target}_backup_$(date +%s)"
+
+    cp -L "$target" "$backup"
+
     rm -f "$target"
   fi
 
