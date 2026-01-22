@@ -1,0 +1,11 @@
+bradlc.vscode-tailwindcss
+docker.docker
+editorconfig.editorconfig
+eriklynd.json-tools
+golang.go
+jakebecker.elixir-ls
+jdinhlife.gruvbox
+ms-vscode.makefile-tools
+shopify.ruby-lsp
+usernamehw.errorlens
+waderyan.gitblame

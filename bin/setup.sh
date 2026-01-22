@@ -74,6 +74,27 @@ install_tmux () {
   ln -s "$source" "$target"
 }
 
+install_vscode() {
+  local vscode_config="$HOME/.config/vscode"
+  local code_dir="$HOME/.config/Code"
+  local code_user_dir="$code_dir/User"
+
+  if [ ! -d "$vscode_config" ]; then
+    echo "VS Code config not found, skipping"
+    return 0
+  fi
+
+  if [ -e "$code_user_dir" ] && [ ! -L "$code_user_dir" ]; then
+    echo "Backing up existing VS Code User directory"
+    mv "$code_user_dir" "${code_user_dir}_backup_$(date +%s)"
+  fi
+
+  mkdir -p "$code_dir"
+  ln -sfn "$vscode_config" "$code_user_dir"
+
+  echo "VS Code config linked"
+}
+
 main() {
   if [ ! -d "$HOME/.dotfiles" ]; then
     git clone https://github.com/KauanCarvalho/.dotfiles.git "$HOME/.dotfiles"
@@ -82,6 +103,7 @@ main() {
   install_dotfiles
   install_configs
   install_tmux
+  install_vscode
 
   echo "Finished installation"
 }

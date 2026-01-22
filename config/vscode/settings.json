@@ -1,0 +1,41 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.fontSize": 12,
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.rulers": [
+    80,
+    100
+  ],
+  "editor.renderWhitespace": "trailing",
+  "editor.scrollBeyondLastLine": false,
+  "files.autoSave": "onFocusChange",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "workbench.startupEditor": "none",
+  "terminal.integrated.fontFamily": "monospace",
+  "telemetry.telemetryLevel": "off",
+  "[go]": {
+    "editor.tabSize": 8,
+    "editor.insertSpaces": false,
+    "editor.formatOnSave": true
+  },
+  "[ruby]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true
+  },
+  "[elixir]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true
+  },
+  "workbench.colorTheme": "Gruvbox Dark Medium"
+}

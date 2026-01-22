@@ -1,0 +1,10 @@
+{
+  "Frozen string literal": {
+    "prefix": "frozen",
+    "body": [
+      "# frozen_string_literal: true",
+      ""
+    ],
+    "description": "Ruby frozen string literal comment"
+  }
+}

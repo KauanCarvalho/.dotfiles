@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -e
 
 # Directory where all .snip files are stored

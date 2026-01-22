@@ -1,0 +1,30 @@
+{
+  "TODO comment": {
+    "prefix": "todo",
+    "body": [
+      "TODO: $1"
+    ],
+    "description": "Insert TODO comment"
+  },
+  "FIXME comment": {
+    "prefix": "fixme",
+    "body": [
+      "FIXME: $1"
+    ],
+    "description": "Insert FIXME comment"
+  },
+  "DEBUG marker": {
+    "prefix": "debug",
+    "body": [
+      "DEBUG: $1"
+    ],
+    "description": "Insert debug marker"
+  },
+  "Current date": {
+    "prefix": "date",
+    "body": [
+      "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
+    ],
+    "description": "Insert current date"
+  }
+}
