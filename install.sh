@@ -3,7 +3,7 @@
 set -eu pipefail
 
 install_dotfiles () {
-  dotfiles=( aliases asdfrc default-gems gemrc gitattributes gitignore tmux.conf solargraph.yml zshrc )
+  dotfiles=( aliases asdfrc default-gems gemrc gitattributes gitignore solargraph.yml zshrc )
 
   for dotfile in "${dotfiles[@]}";
   do
@@ -58,6 +58,19 @@ ln_file_to_home_directory () {
   ln -s "$source_full_path" "$target_full_path"
 }
 
+install_tmux () {
+  local source="$HOME/.dotfiles/tmux/tmux.conf"
+  local target="$HOME/.tmux.conf"
+
+  if [ -e "$target" ] || [ -L "$target" ]; then
+    echo "Backing up ~/.tmux.conf"
+    cp -L "$target" "${target}_backup_$(date +%s)"
+    rm -f "$target"
+  fi
+
+  ln -s "$source" "$target"
+}
+
 main() {
   if [ ! -d "$HOME/.dotfiles" ]; then
     git clone https://github.com/KauanCarvalho/.dotfiles.git "$HOME/.dotfiles"
@@ -65,6 +78,7 @@ main() {
 
   install_dotfiles
   install_configs
+  install_tmux
 
   echo "Finished installation"
 }
