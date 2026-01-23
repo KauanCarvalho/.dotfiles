@@ -1,32 +1,30 @@
 #!/usr/bin/env bash
 
-set -eu
+set -euo pipefail
 
 cleanup_backups() {
   local backups
 
-  backups=$(find "$HOME" -maxdepth 1 -type f -name ".*_backup_*")
+  backups=$(find "$HOME" \
+    -type d -name "*_backup_*" \
+    -o -type f -name "*_backup_*" 2>/dev/null)
 
   if [ -z "$backups" ]; then
-    echo "No backup files found."
+    echo "No backups found."
     return 0
   fi
 
-  echo "Backup files found:"
+  echo "Backups found:"
   echo "$backups"
   echo
 
-  read -r -p "Remove all backups? [y/N] " confirm
+  read -r -p "Remove ALL backups listed above? [y/N] " confirm
   if [ "$confirm" = "y" ]; then
-    rm -f $backups
+    rm -rf $backups
     echo "Backups removed."
   else
     echo "Aborted."
   fi
 }
 
-main() {
-  cleanup_backups
-}
-
-main
+cleanup_backups

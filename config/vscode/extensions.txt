@@ -1,7 +1,12 @@
+alefragnani.project-manager
 bradlc.vscode-tailwindcss
+codezombiech.gitignore
 dart-code.dart-code
 dart-code.flutter
 docker.docker
+donjayamanne.git-extension-pack
+donjayamanne.githistory
+eamodio.gitlens
 editorconfig.editorconfig
 eriklynd.json-tools
 github.copilot
@@ -16,3 +21,4 @@ ms-vscode.makefile-tools
 shopify.ruby-lsp
 usernamehw.errorlens
 waderyan.gitblame
+ziyasal.vscode-open-in-github

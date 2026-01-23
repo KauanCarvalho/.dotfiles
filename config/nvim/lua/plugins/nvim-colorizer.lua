@@ -14,6 +14,7 @@ return {
     'vue',
     'eruby',
     'elixir',
+    'go'
   },
   event = 'BufEnter',
   opts = { '*' },

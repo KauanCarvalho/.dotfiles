@@ -45,3 +45,6 @@ __pycache__/
 # Temporary files created by shells or tools
 *.pid
 *.seed
+
+# Backup files
+*_backup_*
