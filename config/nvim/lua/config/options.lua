@@ -28,7 +28,7 @@ set.diffopt:append('vertical')
 set.clipboard      = 'unnamedplus'
 
 -- Syntax highlighting.
-vim.cmd('syntax off')
+vim.cmd('syntax on')
 
 -- Swap and backup files.
 set.swapfile       = false
@@ -36,7 +36,7 @@ set.backup         = false
 set.writebackup    = false
 
 -- Undo.
-set.undodir        = vim.fn.expand('~/.config/nvim/backups')
+set.undodir        = vim.fn.expand('~/.local/state/nvim/undo')
 set.undofile       = true
 
 -- Indentation.

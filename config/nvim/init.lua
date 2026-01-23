@@ -1,11 +1,11 @@
-require("config.options")
+require('config.options')
 
-require("core.lazy")
+require('core.lazy')
 
-vim.api.nvim_create_autocmd("VimEnter", {
+vim.api.nvim_create_autocmd('VimEnter', {
   callback = function()
-    require("config.keymaps")
+    require('config.keymaps')
   end,
 })
 
-require("config.autocmds")
+require('config.autocmds')
