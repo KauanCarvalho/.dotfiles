@@ -8,7 +8,7 @@ without unnecessary abstractions or hidden automation.
 
 ---
 
-## What’s included
+## What's included
 
 ### Shell
 - zsh configuration
@@ -21,6 +21,10 @@ without unnecessary abstractions or hidden automation.
 - **VS Code**
   - Settings, keybindings and snippets
   - Extensions managed via versioned list
+- **Claude Code**
+  - Global settings and instructions
+  - Custom slash commands and agents
+  - Plugins managed via versioned list
 
 ### Terminal
 - Kitty configuration
@@ -40,6 +44,9 @@ without unnecessary abstractions or hidden automation.
 
 ```
 bin/          → executable helper scripts
+  claude/     → Claude Code helper scripts
+  vscode/     → VS Code helper scripts
+claude/       → Claude Code global configuration
 config/       → XDG-compliant configs (nvim, kitty, vscode)
 tmux/         → tmux configuration (modular)
 snippets/     → custom snippets
@@ -78,20 +85,55 @@ Two helper scripts are provided:
 
 - **Install extensions (dotfiles → machine)**
   ```bash
-  bin/vscode-install-extensions.sh
+  bin/vscode/install-extensions.sh
   ```
 
 - **Sync extensions (machine → dotfiles)**
   ```bash
-  bin/vscode-sync-extensions.sh
+  bin/vscode/sync-extensions.sh
   ```
 
-Both scripts:
-- Check if `code` is installed
-- Are safe to run multiple times
-- Do nothing if VS Code is not present
-
+Both scripts check if `code` is installed and are safe to run multiple times.
 Extensions are **not installed automatically** by `setup.sh` and must be run
+explicitly when desired.
+
+---
+
+## Claude Code
+
+Claude Code configuration is stored in `claude/` and linked individually into
+`~/.claude/` (the directory is not linked as a whole, since it also contains
+local runtime data such as sessions, cache and history).
+
+### What is synced
+
+| File/Dir | Purpose |
+|---|---|
+| `settings.json` | Global settings, permissions, MCP servers, hooks |
+| `CLAUDE.md` | Global instructions for the assistant |
+| `commands/` | Custom slash commands (one `.md` file per command) |
+| `agents/` | Custom subagent definitions |
+| `statusline-command.sh` | Shell script powering the Claude Code status line |
+| `plugins.txt` | List of installed plugins |
+| `marketplaces.txt` | List of third-party plugin marketplaces |
+
+### Plugins
+
+Plugins are managed via versioned lists and two helper scripts:
+
+- **Install plugins (dotfiles → machine)**
+  ```bash
+  bin/claude/install-plugins.sh
+  ```
+  Adds all marketplaces first, then installs all plugins.
+
+- **Sync plugins (machine → dotfiles)**
+  ```bash
+  bin/claude/sync-plugins.sh
+  ```
+  Exports currently installed marketplaces and plugins to their respective files.
+
+Plugins are **not installed automatically** by `setup.sh` and must be run
 explicitly when desired.
 
 ---
@@ -113,6 +155,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/KauanCarvalho/.dotfiles/
 - `zsh`
 - `tmux`
 - `neovim`
+- `claude`
 - `kitty`
 
 Some features also rely on common CLI tools such as:
@@ -127,6 +170,8 @@ Some features also rely on common CLI tools such as:
 - Clipboard integration is handled via tmux.
 - VS Code forks (VSCodium, Antigravity Editor) use their own config paths and are
   intentionally not coupled to this setup.
+- Claude Code runtime data (`sessions/`, `cache/`, `history.jsonl`, etc.) is
+  intentionally not synced — only portable configuration is versioned.
 - This repository reflects my personal workflow and evolves over time.
 - Changes are added only when they provide clear, long-term value.
 

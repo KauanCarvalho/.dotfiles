@@ -101,6 +101,39 @@ install_tmux() {
   echo "Installed tmux"
 }
 
+install_claude() {
+  local claude_src="$DOTFILES_DIR/claude"
+  local claude_dst="$HOME/.claude"
+
+  if [ ! -d "$claude_src" ]; then
+    echo "Skipping Claude Code (not found)"
+    return
+  fi
+
+  mkdir -p "$claude_dst"
+
+  for item in settings.json CLAUDE.md commands agents statusline-command.sh; do
+    local source="$claude_src/$item"
+    local target="$claude_dst/$item"
+
+    if [ ! -e "$source" ]; then
+      continue
+    fi
+
+    if [ -L "$target" ]; then
+      echo "Claude $item already linked"
+      continue
+    fi
+
+    if [ -e "$target" ]; then
+      backup "$target"
+    fi
+
+    link "$source" "$target"
+    echo "Installed Claude $item"
+  done
+}
+
 install_vscode() {
   local source="$CONFIG_SRC/vscode"
   local target="$HOME/.config/Code/User"
@@ -133,6 +166,7 @@ main() {
   install_configs
   install_tmux
   install_vscode
+  install_claude
 
   echo "Dotfiles installation complete"
 }

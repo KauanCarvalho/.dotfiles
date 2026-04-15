@@ -20,47 +20,44 @@ copy_to_clipboard() {
   fi
 }
 
-# Build the searchable index for fzf
+# Build the searchable index for fzf (file TAB title)
 build_index() {
+  local found=0
   for path in "$SNIPPETS_DIR"/*.snip; do
+    [ -e "$path" ] || continue
+    found=1
     awk -v file="$(basename "$path" .snip)" '
       /^## / {
-        if (in_snippet) {
-          clean = body
-          gsub(/\n+/, " ", clean)
-          preview = substr(clean, 1, 80)
-          print file "\t" title "\t" preview "\t" clean
-        }
+        if (in_snippet) print file "\t" title
         title = substr($0, 4)
-        body = ""
         in_snippet = 1
         next
       }
-
-      in_snippet {
-        body = body $0 "\n"
-      }
-
       END {
-        if (in_snippet) {
-          clean = body
-          gsub(/\n+/, " ", clean)
-          preview = substr(clean, 1, 80)
-          print file "\t" title "\t" preview "\t" clean
-        }
+        if (in_snippet) print file "\t" title
       }
     ' "$path"
   done
+  [ "$found" -eq 1 ] || { echo "No snippets found in $SNIPPETS_DIR" >&2; exit 1; }
 }
 
-# Run fzf and capture exit code
+# Run fzf with a live preview panel showing the full snippet content
 set +e
 selection="$(
   build_index |
   fzf \
     --prompt="snippet> " \
     --delimiter='\t' \
-    --with-nth=1,2,3
+    --with-nth=1,2 \
+    --preview="
+      file=\$(printf '%s' {} | cut -f1)
+      title=\$(printf '%s' {} | cut -f2)
+      awk -v t=\"\$title\" '
+        /^\#\# / { found = (\$0 == \"## \" t); next }
+        found { print }
+      ' \"$SNIPPETS_DIR/\$file.snip\"
+    " \
+    --preview-window=right:50%:wrap
 )"
 fzf_status=$?
 set -e
@@ -70,10 +67,8 @@ if [ "$fzf_status" -ne 0 ] || [ -z "$selection" ]; then
   exit 0
 fi
 
-# Extract the snippet category (file name)
+# Extract file and title from selection
 category=$(cut -f1 <<<"$selection")
-
-# Extract the snippet title
 title=$(cut -f2 <<<"$selection")
 
 # Extract the exact snippet content from the source file
