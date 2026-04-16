@@ -28,7 +28,7 @@ without unnecessary abstractions or hidden automation.
 
 ### Terminal
 - Kitty configuration
-- Gruvbox Dark color scheme
+- Flexoki Dark color scheme
 
 ### Multiplexer
 - tmux configuration (modular)
