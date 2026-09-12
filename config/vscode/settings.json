@@ -27,6 +27,15 @@
     "editor.insertSpaces": false,
     "editor.formatOnSave": true
   },
+  "go.lintTool": "golangci-lint",
+  "go.lintOnSave": "package",
+  "gopls": {
+    "staticcheck": true,
+    "analyses": {
+      "unusedparams": true,
+      "shadow": true
+    }
+  },
   "[ruby]": {
     "editor.tabSize": 2,
     "editor.insertSpaces": true,
@@ -37,5 +46,6 @@
     "editor.insertSpaces": true,
     "editor.formatOnSave": true
   },
-  "workbench.colorTheme": "Gruvbox Dark Medium"
+  "workbench.colorTheme": "Gruvbox Dark Medium",
+  "claudeCode.preferredLocation": "panel"
 }

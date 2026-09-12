@@ -1,4 +1,8 @@
 {
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
   "enabledPlugins": {
     "caveman@caveman": true
   },
@@ -9,9 +13,5 @@
         "repo": "JuliusBrussee/caveman"
       }
     }
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
   }
 }

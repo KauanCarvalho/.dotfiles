@@ -1,0 +1,7 @@
+---
+description: Shared agent instructions from dotfiles
+alwaysApply: true
+---
+
+Follow `~/.dotfiles/ai/AGENTS.md` as global instructions. That file is the
+single source of truth shared with Claude Code; do not fork a second copy here.

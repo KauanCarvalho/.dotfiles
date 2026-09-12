@@ -1,5 +1,5 @@
-# Local / sensitive snippets (not committed)
+# Local / sensitive snippets (not committed).
 snippets/env.snip
 
-# Claude Code — sensitive/local settings (tokens, machine-specific MCP config)
-claude/settings.local.json
+# Claude Code — sensitive/local settings (tokens, machine-specific MCP config).
+ai/claude/settings.local.json

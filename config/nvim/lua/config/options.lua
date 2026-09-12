@@ -59,7 +59,7 @@ set.listchars:append({
 -- Folds.
 set.foldmethod     = 'indent'
 set.foldnestmax    = 2
-set.foldcolumn     = '0'
+set.foldcolumn     = '1'
 set.foldlevel      = 99
 set.foldlevelstart = 99
 set.foldenable     = true

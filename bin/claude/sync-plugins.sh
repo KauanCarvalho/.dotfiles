@@ -3,8 +3,8 @@
 set -e
 
 DOTFILES_DIR="$HOME/.dotfiles"
-PLUGINS_FILE="$DOTFILES_DIR/claude/plugins.txt"
-MARKETPLACES_FILE="$DOTFILES_DIR/claude/marketplaces.txt"
+PLUGINS_FILE="$DOTFILES_DIR/ai/claude/plugins.txt"
+MARKETPLACES_FILE="$DOTFILES_DIR/ai/claude/marketplaces.txt"
 DEFAULT_MARKETPLACE="anthropics/claude-plugins-official"
 
 if ! command -v claude >/dev/null 2>&1; then
@@ -28,7 +28,21 @@ if echo "$raw" | grep -qi "no plugins"; then
   echo "No plugins installed, clearing plugins file"
   > "$PLUGINS_FILE"
 else
-  echo "$raw" | grep '❯' | awk '{print $2}' | sort > "$PLUGINS_FILE"
+  # Only sync plugins that are enabled and user-scoped: a disabled plugin
+  # would get silently re-enabled on install, and a project-scoped one
+  # (Scope: project/local) only makes sense inside that one project, not
+  # installed globally on every machine.
+  echo "$raw" | awk '
+    /❯/ {
+      if (name != "" && scope == "user" && status == "enabled") print name
+      name = $2; scope = ""; status = ""
+    }
+    /Scope:/ { scope = $2 }
+    /Status:/ { status = $3 }
+    END {
+      if (name != "" && scope == "user" && status == "enabled") print name
+    }
+  ' | sort > "$PLUGINS_FILE"
 fi
 
 echo "Plugins synced to $PLUGINS_FILE"

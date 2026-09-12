@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
+shopt -s nullglob
 
 DOTFILES_DIR="$HOME/.dotfiles"
 CONFIG_SRC="$DOTFILES_DIR/config"
@@ -21,6 +22,25 @@ link() {
   local target="$2"
 
   ln -s "$source" "$target"
+}
+
+link_dir_item() {
+  local source="$1"
+  local target="$2"
+
+  if [ -L "$target" ]; then
+    if [ "$(readlink "$target")" = "$source" ]; then
+      echo "$(basename "$target") already linked"
+      return
+    fi
+    echo "$(basename "$target") points elsewhere, relinking"
+    rm "$target"
+  elif [ -e "$target" ]; then
+    backup "$target"
+  fi
+
+  link "$source" "$target"
+  echo "Installed $(basename "$target")"
 }
 
 install_config() {
@@ -102,7 +122,7 @@ install_tmux() {
 }
 
 install_claude() {
-  local claude_src="$DOTFILES_DIR/claude"
+  local claude_src="$DOTFILES_DIR/ai/claude"
   local claude_dst="$HOME/.claude"
 
   if [ ! -d "$claude_src" ]; then
@@ -112,26 +132,93 @@ install_claude() {
 
   mkdir -p "$claude_dst"
 
-  for item in settings.json CLAUDE.md commands agents statusline-command.sh; do
-    local source="$claude_src/$item"
-    local target="$claude_dst/$item"
-
-    if [ ! -e "$source" ]; then
+  for item in settings.json CLAUDE.md statusline-command.sh; do
+    if [ ! -e "$claude_src/$item" ]; then
       continue
     fi
 
-    if [ -L "$target" ]; then
-      echo "Claude $item already linked"
-      continue
-    fi
-
-    if [ -e "$target" ]; then
-      backup "$target"
-    fi
-
-    link "$source" "$target"
-    echo "Installed Claude $item"
+    link_dir_item "$claude_src/$item" "$claude_dst/$item"
   done
+
+  for dir in commands agents skills; do
+    install_subdir_items "$claude_src/$dir" "$claude_dst/$dir" "Claude $dir"
+  done
+}
+
+install_subdir_items() {
+  local source_dir="$1"
+  local target_dir="$2"
+  local label="$3"
+
+  if [ ! -d "$source_dir" ]; then
+    return
+  fi
+
+  if [ -L "$target_dir" ]; then
+    echo "Migrating $label from whole-dir symlink to per-item links"
+    backup "$target_dir"
+  fi
+
+  mkdir -p "$target_dir"
+
+  for path in "$source_dir"/*; do
+    link_dir_item "$path" "$target_dir/$(basename "$path")"
+  done
+}
+
+install_cursor() {
+  local cursor_src="$DOTFILES_DIR/ai/cursor"
+  local cursor_dst="$HOME/.cursor"
+
+  if [ ! -d "$cursor_src" ]; then
+    echo "Skipping Cursor (not found)"
+    return
+  fi
+
+  mkdir -p "$cursor_dst"
+
+  for path in "$cursor_src"/*; do
+    local name
+    name="$(basename "$path")"
+    case "$name" in
+      commands|agents|skills|rules)
+        continue
+        ;;
+    esac
+    link_dir_item "$path" "$cursor_dst/$name"
+  done
+
+  for dir in commands agents skills rules; do
+    install_subdir_items "$cursor_src/$dir" "$cursor_dst/$dir" "Cursor $dir"
+  done
+
+  install_cursor_editor
+}
+
+install_cursor_editor() {
+  local vscode_src="$CONFIG_SRC/vscode"
+  local cursor_user="$HOME/.config/Cursor/User"
+
+  if [ ! -d "$vscode_src" ]; then
+    echo "Skipping Cursor editor settings (VS Code config not found)"
+    return
+  fi
+
+  mkdir -p "$cursor_user"
+
+  for item in settings.json keybindings.json; do
+    if [ ! -e "$vscode_src/$item" ]; then
+      continue
+    fi
+    link_dir_item "$vscode_src/$item" "$cursor_user/$item"
+  done
+
+  if [ -d "$vscode_src/snippets" ]; then
+    mkdir -p "$cursor_user/snippets"
+    for path in "$vscode_src/snippets"/*; do
+      link_dir_item "$path" "$cursor_user/snippets/$(basename "$path")"
+    done
+  fi
 }
 
 install_vscode() {
@@ -166,6 +253,7 @@ main() {
   install_configs
   install_tmux
   install_vscode
+  install_cursor
   install_claude
 
   echo "Dotfiles installation complete"

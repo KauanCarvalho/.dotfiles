@@ -11,3 +11,12 @@ local function open_nvim_tree()
 end
 
 vim.api.nvim_create_autocmd("User", { pattern = "NvimTreeLoaded", callback = open_nvim_tree })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "eruby", "heex" },
+  callback = function(args)
+    local opts = { buffer = args.buf, silent = true }
+    vim.keymap.set("i", "<leader>=", "<%=  %><Esc>2hi", opts)
+    vim.keymap.set("i", "<leader>%", "<%  %><Esc>2hi", opts)
+  end,
+})

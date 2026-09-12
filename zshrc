@@ -46,7 +46,6 @@ setopt hist_verify
 setopt share_history
 
 # Speed up zsh completions.
-set -k
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
@@ -102,7 +101,7 @@ then
   git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
 fi
 fpath+=($HOME/.zsh/pure)
-fpath+=(${ASDF_DATA_DIR}/completions)
+fpath+=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions)
 
 # TMUX session.
 [[ -z "$TMUX" ]] && tmux new-session -A -s main

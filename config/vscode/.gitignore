@@ -1,0 +1,23 @@
+# Ignore everything by default.
+*
+
+# Allow main config files.
+!.gitignore
+!settings.json
+!keybindings.json
+!extensions.txt
+!mcp.json
+
+# Allow snippets.
+!snippets/
+!snippets/**
+
+# Ignore VS Code internal state.
+History/
+workspaceStorage/
+globalStorage/
+storage.json
+chatSessions/
+chatEditingSessions/
+logs/
+CachedExtensions/
