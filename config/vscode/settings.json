@@ -46,6 +46,7 @@
     "editor.insertSpaces": true,
     "editor.formatOnSave": true
   },
-  "workbench.colorTheme": "Gruvbox Dark Medium",
-  "claudeCode.preferredLocation": "panel"
+  "workbench.colorTheme": "Dracula Theme",
+  "claudeCode.preferredLocation": "panel",
+  "claudeCode.hideOnboarding": true
 }

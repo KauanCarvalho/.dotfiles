@@ -33,7 +33,7 @@ overlay for anything machine- or work-specific.
 
 ### Terminal
 
-- Kitty configuration, Flexoki Dark color scheme.
+- Kitty configuration, Dracula color scheme.
 
 ### Multiplexer
 

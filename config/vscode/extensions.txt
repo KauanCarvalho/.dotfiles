@@ -5,12 +5,12 @@ codezombiech.gitignore
 docker.docker
 donjayamanne.git-extension-pack
 donjayamanne.githistory
+dracula-theme.theme-dracula
 eamodio.gitlens
 editorconfig.editorconfig
 eriklynd.json-tools
 golang.go
 jakebecker.elixir-ls
-jdinhlife.gruvbox
 meezilla.json
 ms-azuretools.vscode-containers
 ms-azuretools.vscode-docker
